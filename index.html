@@ -11,11 +11,37 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="cesta" type="button" class="btn btn-white rounded border border-succes" data-toggle="modal"
+                    data-target="#exampleModal">Favorite character</button>
+
+                <!-- Button trigger modal -->
+
+
+                <!-- Modal -->
+                <div class="modal fade text-white" id="exampleModal" tabindex="-1" role="dialog"
+                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header bg-black">
+                                <h5 class="modal-title" id="exampleModalLabel">Favorite Characters</h5>
+                            </div>
+                            <div id="modalCoctail" class="modal-body bg-black">
+
+                            </div>
+                            <div class="modal-footer bg-black">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <div id="autor" class="container-fluid text-center">
         <div id="serie" class="row row-cols-6 gap-3">
 
         </div>
     </div>
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

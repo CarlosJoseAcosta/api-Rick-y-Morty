@@ -1,8 +1,8 @@
 let ul = document.getElementById("serie");
 const url = "https://rickandmortyapi.com/api/character";
-let arrayCesta = [];
-let precio = [];
-// let modal = document.getElementById("modalCoctail");
+let arrayPersonajes = [];
+let Estatus = [];
+let modal = document.getElementById("modalCoctail");
 
 function creacionDeNodo(e){
     return document.createElement(e);
@@ -29,13 +29,20 @@ fetch(url)
         let br = creacionDeNodo("br");
         img.src = x.image;
         h2.textContent = x.name;
-        h4.textContent = x.status + " " + x.species;
+        if(x.status == "Alive"){
+            h4.textContent = "✅" + x.status + " " + x.species;
+        }else if(x.status == "Dead"){
+            h4.textContent = "⚰️" + x.status + " " + x.species;
+        }else{
+            h4.textContent = "❓" + x.status + " " + x.species;
+        }
         p.textContent = "Last know location:";
         p1.textContent = x.location.name;
         p2.textContent = "Originating from:";
         p3.textContent = x.origin.name;
         boton.textContent = "Favorite";
-        boton.setAttribute("value", x.id);
+        boton.setAttribute("value", x.status);
+        boton.setAttribute("id", x.name);
         anadir(ul, div1);
         anadir(div1, img);
         anadir(div1, h2);
@@ -48,5 +55,43 @@ fetch(url)
         anadir(div1,br);
         div1.classList.add(
             "col",
+            "border",
+            "border-succes",
         );
-    })})
+    })
+})
+
+ul.addEventListener("click", (e)=>{
+    if(e.target.tagName === "BUTTON"){
+        let valorBoton = e.target.value;
+        let EstatusPersonaje = e.target.id;
+        localStorage.setItem("cesta",JSON.stringify(arrayPersonajes));
+        if(localStorage.cesta){
+            let auxiliar = localStorage.getItem("cesta");
+            arrayPersonajes = JSON.parse(auxiliar);
+            arrayPersonajes.push(valorBoton);
+            console.log(arrayPersonajes);
+        }else{
+            arrayPersonajes.push(valorBoton);
+            localStorage.setItem("cesta",JSON.stringify(arrayPersonajes));
+        }
+        if(localStorage.Estatus){
+            let auxiliar = localStorage.getItem("Estatus");
+            Estatus = JSON.parse(auxiliar);
+            Estatus.push(EstatusPersonaje);
+            console.log(Estatus);
+        }else{
+            Estatus.push(EstatusPersonaje);
+            localStorage.setItem("cesta",JSON.stringify(arrayPersonajes));
+            console.log(Estatus);
+        }
+    }
+})
+let nose = document.getElementById("cesta");
+nose.addEventListener("click", ()=>{
+    for(let i = 0; i < arrayPersonajes.length; i++){
+        let pCarrito = document.createElement("p");
+        pCarrito.textContent = Estatus[i] + "--------------" + arrayPersonajes[i];
+        modal.appendChild(pCarrito);
+    }
+})
